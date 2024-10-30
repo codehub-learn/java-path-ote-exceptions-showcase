@@ -1,3 +1,7 @@
+import exception.CheckedException;
+import exception.CustomerInvalidException;
+import model.Customer;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,22 +41,58 @@ public class Main {
         System.out.println(hashMap);*/
         //divisionByZero();
         //indexOutOfBounds();
-        tester();
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
-        System.out.println("hello");
+        //tester();
+        //finallyShowcase();
 
 
+        try {
+            /*
+             * c1
+             * c2
+             * c3
+             * */
+            registerCustomer(1, "Ioannis", "ioannis");
+            System.out.println("hi");
+        } catch (CustomerInvalidException e) {
+            System.out.println("Could not register customer: " + e.getMessage());
+        }
 
+
+    }
+
+    private static void checkedExceptionShowcase() throws CheckedException {
+        if(true){
+            throw new CheckedException("checked exception error message");
+        }
+    }
+
+    // should be in service:
+    private static Customer registerCustomer(long id, String name, String email) {
+        if (!email.contains("@")) {
+            throw new CustomerInvalidException("Email is incorrect.");
+        }
+        if (name.length() < 5){
+            throw new CustomerInvalidException("Name is very short, please insert one above 5 characters.");
+        }
+        return new Customer(id, name, email);
+    }
+
+    private static void finallyShowcase() {
+        try {
+            int userInputAsAnswer = Integer.parseInt("aacas");
+            System.out.println("no error");
+        } catch (NumberFormatException e) {
+            System.out.println("error");
+        } finally {
+            System.out.println("finally");
+        }
     }
 
     private static void tester() {
         try {
             /*
-            * ...
-            * */
+             * ...
+             * */
             indexOutOfBounds(); // out of bounds exception
             nullPointer(); // null pointer exception
         /*} catch (NullPointerException e) {
@@ -67,7 +107,7 @@ public class Main {
         }
     }
 
-    private static void readFromFile(){
+    private static void readFromFile() {
         try {
             FileInputStream fileInputStream = new FileInputStream("reports.csv");
         } catch (FileNotFoundException e) {
@@ -75,7 +115,7 @@ public class Main {
         }
     }
 
-    private static void writeToFile(){
+    private static void writeToFile() {
         try {
             PrintWriter out = new PrintWriter(new FileOutputStream("reports.csv"));
         } catch (FileNotFoundException e) {
@@ -83,7 +123,7 @@ public class Main {
         }
     }
 
-    private static void openDatabaseConnection(){
+    private static void openDatabaseConnection() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/codehub", "root", "root");
         } catch (SQLException e) {

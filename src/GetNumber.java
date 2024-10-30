@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 public class GetNumber {
     public static void main(String[] args) {
+        //getUserInputAndConvertToNumber();
+    }
+
+    private static void getUserInputAndConvertToNumber(){
         while(true) {
             String userAnswer = null;
             try {
@@ -15,14 +19,9 @@ public class GetNumber {
                 // scenario 1
                 System.out.println("Please enter a correct number, the number you inserted was wrong: " + userAnswer);
             } catch (Exception e) {
-                // scenario 3
+                // scenario 2
                 System.out.println("Something went wrong. Please try again or contact the administrator.");
-
             }
         }
-    }
-
-    private static void getUserInputAndConvertToNumber(){
-
     }
 }
